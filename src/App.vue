@@ -12,7 +12,9 @@
                 <v-icon>mdi-home</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Home</v-list-item-title>
+                <v-list-item-title>
+                  <router-link to="/compare">Compare</router-link>
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-list-item link>
@@ -20,7 +22,9 @@
                 <v-icon>mdi-email</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title>Contact</v-list-item-title>
+                <v-list-item-title>
+                  <router-link to="/comma-to-newline">CommaToNewLine</router-link>
+                </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>
@@ -35,7 +39,7 @@
         </v-app-bar>
 
         <v-main>
-          <HelloWorld/>
+          <router-view/>
         </v-main>
         <v-footer
           app
