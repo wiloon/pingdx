@@ -1,7 +1,11 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <router-link :to="{ path: 'comma-to-newline'}">
+      comma && newline
+    </router-link>
+    <router-link :to="{ path: 'compare'}">
+      compare
+    </router-link>
   </div>
 </template>
 
@@ -14,5 +18,6 @@ import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
     HelloWorld
   }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+}
 </script>
