@@ -3,6 +3,10 @@
     <v-row>
       <v-btn @click="exec">Exec</v-btn>
       <v-btn @click="rntoc">\r\n > ,</v-btn>
+      <v-checkbox
+        v-model="checkbox"
+        :label="`add single quotation marks: ${checkbox.toString()}`"
+      ></v-checkbox>
     </v-row>
     <v-row>
       <v-col cols="6">
@@ -39,6 +43,8 @@ import Axios from 'axios'
 export default class CommaToNewLine extends Vue {
   foo = ''
   bar = ''
+  checkbox = false
+
   exec (): void {
     console.log('exec')
     Axios.get('/comma-to-newline',
@@ -55,7 +61,7 @@ export default class CommaToNewLine extends Vue {
     console.log('rntoc')
     Axios.get('/newline-to-comma',
       {
-        params: { bar: this.bar }
+        params: { bar: this.bar, addsinglequotationmarks: this.checkbox }
       }).then(
       response => {
         this.foo = response.data
