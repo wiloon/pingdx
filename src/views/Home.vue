@@ -6,6 +6,9 @@
     <router-link :to="{ path: 'compare'}">
       compare
     </router-link>
+    <router-link :to="{ path: 'base64'}">
+      base64
+    </router-link>
   </div>
 </template>
 

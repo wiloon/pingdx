@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router'
 import Home from '../views/Home.vue'
 import HelloWorld from '../components/HelloWorld.vue'
 import CommaToNewLine from '../views/CommaToNewLine.vue'
+import Base64 from '../views/Base64.vue'
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes: Array<RouteConfig> = [
     path: '/comma-to-newline',
     name: 'CommaToNewLine',
     component: CommaToNewLine
+  },
+  {
+    path: '/base64',
+    name: 'Base64',
+    component: Base64
   }
 ]
 

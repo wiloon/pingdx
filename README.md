@@ -1,5 +1,19 @@
 # pingdx
-
+### build
+    buildah bud -f Dockerfile  -t pingdx .
+### run
+    podman run \
+    --name pingdx \
+    -p 30080:80 \
+    -v /etc/localtime:/etc/localtime:ro \
+    localhost/pingdx
+ 
+ ### run -d
+    podman run -d \
+    --name pingdx \
+    -p 30080:80 \
+    -v /etc/localtime:/etc/localtime:ro \
+    localhost/pingdx
 ## Project setup
 ```
 yarn install
