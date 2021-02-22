@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-row>
-      <v-btn @click="exec">Exec</v-btn>
-      <v-btn @click="rntoc">\r\n > ,</v-btn>
+      <v-btn @click="commaToRn">, > \r\n</v-btn>
+      <v-btn @click="rntoComma">\r\n > ,</v-btn>
       <v-checkbox
         v-model="checkbox"
         :label="`add single quotation marks: ${checkbox.toString()}`"
@@ -16,7 +16,7 @@
           outlined
           rows="25"
           row-height="15"
-          v-model="foo"
+          v-model="stringComma"
         ></v-textarea>
       </v-col>
       <v-col cols="6">
@@ -26,10 +26,28 @@
           outlined
           rows="25"
           row-height="15"
-          v-model="bar"
+          v-model="stringRn"
         ></v-textarea>
       </v-col>
     </v-row>
+    <v-snackbar
+      v-model="snackbar"
+      :timeout="timeout"
+      color="error"
+    >
+      {{ snackBarText }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn
+          color="#fff"
+          text
+          v-bind="attrs"
+          @click="snackbar = false"
+        >
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -41,30 +59,41 @@ import Axios from 'axios'
   components: {}
 })
 export default class CommaToNewLine extends Vue {
-  foo = ''
-  bar = ''
+  stringComma = ''
+  stringRn = ''
   checkbox = false
+  snackBarText = ''
+  timeout = 3000
+  snackbar = false
 
-  exec (): void {
-    console.log('exec')
+  commaToRn (): void {
+    if (this.stringComma === '') {
+      this.snackBarText = 'string comma is empty'
+      this.snackbar = true
+      return
+    }
     Axios.get('/comma-to-newline',
       {
-        params: { foo: this.foo }
+        params: { foo: this.stringComma }
       }).then(
       response => {
-        this.bar = response.data
+        this.stringRn = response.data
       }
     )
   }
 
-  rntoc (): void {
-    console.log('rntoc')
+  rntoComma (): void {
+    if (this.stringRn === '') {
+      this.snackBarText = 'string rn is empty'
+      this.snackbar = true
+      return
+    }
     Axios.get('/newline-to-comma',
       {
-        params: { bar: this.bar, addsinglequotationmarks: this.checkbox }
+        params: { bar: this.stringRn, addsinglequotationmarks: this.checkbox }
       }).then(
       response => {
-        this.foo = response.data
+        this.stringComma = response.data
       }
     )
   }

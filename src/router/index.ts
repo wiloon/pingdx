@@ -15,7 +15,7 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/compare',
-    name: 'HelloWorld',
+    name: 'Compare',
     component: HelloWorld
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -40,4 +40,12 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  console.log('before each, to: ' + to.name)
+  if (to.name === 'Base64') {
+    next('/compare')
+  } else {
+    next()
+  }
+})
 export default router
